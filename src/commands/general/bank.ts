@@ -17,7 +17,7 @@ export default class Bank implements CommandClass {
         const bank: BankData = await database.getBankAccount(db, msg.author.id, msg.guild as Guild);
         let bankHistory = "";
         for (let t of bank.transactions) {
-            bankHistory += `[${moment(t.date).format('LL')}] ${t.description}\n`
+            bankHistory += `[${moment(t.date).format('LL')}] \`${t.description}\`\n`
         }
 
         const bankEmbed = new MessageEmbed()

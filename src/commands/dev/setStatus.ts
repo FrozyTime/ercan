@@ -4,6 +4,8 @@ import { Db } from "mongodb";
 import responses from "../../response";
 import CommandProperties from "../../types/CommandProperties";
 import Command from "../../types/Command";
+import fs from 'fs'
+import path from 'path'
 
 export default class status implements Command {
     executor(msg: Message, args: String[], db: Db) {
@@ -23,6 +25,11 @@ export default class status implements Command {
                 url: "https://www.twitch.tv/jackzeys"
             }
         });
+
+        fs.promises.writeFile(path.join(__dirname, "../../presence.json"), JSON.stringify({
+            type,
+            text: args.join(' ')
+        }, null, "\t"));
 
         responses.Success(msg);
 

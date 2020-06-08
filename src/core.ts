@@ -1,7 +1,8 @@
-import Discord from "discord.js";
+import Discord, { ActivityType } from "discord.js";
 import { MongoClient } from 'mongodb';
 import { OnBotJoin } from './events';
 import CommandHandler from './commands/commandhandler'
+import presence from './presence.json'
 
 (async () => {
     const client = new Discord.Client();
@@ -10,6 +11,14 @@ import CommandHandler from './commands/commandhandler'
     
     /* Client setup  - Events */
     client.on("ready", () => {
+        client.user?.setPresence({
+            activity: { 
+                name: presence.text,
+                type: presence.type.toUpperCase() as ActivityType || "PLAYING",
+                url: "https://www.twitch.tv/jackzeys"
+            }
+        });
+
         client.on("guildCreate", e => OnBotJoin(e, db));
     });
 

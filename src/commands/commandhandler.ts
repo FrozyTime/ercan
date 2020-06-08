@@ -13,6 +13,7 @@ export default async (client: Client, db: Db) => {
     /* Message event */
     client.on("message", async msg => {
         if(msg.author.bot) return;
+        if(msg.channel.type === "dm") return;
         const guildData: GuildData = await Database.getGuildData(db, msg.guild?.id as string);
 
         if(msg.content == `<@!${msg.client.user?.id}>`) {

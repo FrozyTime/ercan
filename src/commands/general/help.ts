@@ -32,6 +32,7 @@ export default class Help implements Command {
 
             const settingsEmbed = new MessageEmbed()
             .setTitle("Command list")
+            .setColor('#2F3136')
             .addField("**Utility** :hammer_pick: ", await docsBuilder(utility, db, msg), true)
             .addField("**Economy** :moneybag:", await docsBuilder(economy, db, msg), false)
             .addField("**NSFW** :heart:", await docsBuilder(nsfw, db, msg), false)
