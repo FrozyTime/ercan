@@ -26,16 +26,18 @@ export default class Help implements Command {
 
             response.Success(msg);
 
-            const utility = additional.cmdlist.filter(c => c.type === 'utility');
-            const economy = additional.cmdlist.filter(c => c.type === 'economy');
-            const nsfw = additional.cmdlist.filter(c => c.type === 'nsfw');
+            const utility = additional.cmdlist.filter(c => c.type === "utility");
+            const economy = additional.cmdlist.filter(c => c.type === "economy");
+            const music = additional.cmdlist.filter(c => c.type === "music");
+            const nsfw = additional.cmdlist.filter(c => c.type === "nsfw");
 
             const settingsEmbed = new MessageEmbed()
             .setTitle("Command list")
             .setColor('#2F3136')
             .addField("**Utility** :hammer_pick: ", await docsBuilder(utility, db, msg), true)
             .addField("**Economy** :moneybag:", await docsBuilder(economy, db, msg), false)
-            .addField("**NSFW** :heart:", await docsBuilder(nsfw, db, msg), false)
+            .addField("**Music** :musical_note:", await docsBuilder(music, db, msg), true)
+            .addField("**NSFW** :heart:", await docsBuilder(nsfw, db, msg), false);
             
             const res = await msg.channel.send(settingsEmbed);
 
